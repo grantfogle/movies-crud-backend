@@ -6,8 +6,8 @@ const queries = require('./queries');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 
-app.use(bodyParser());
-app.use(cors())
+app.use(cors());
+app.use(bodyParser.json());
 
 app.get('/', (req, res) => {
     queries.listAll().then(movies => res.send(movies));
@@ -22,7 +22,10 @@ app.post('/', (req, res) => {
 })
 
 app.delete('/:id', (req, res) => {
-    queries.deleteMovie(req.params.id).then(movies => res.send({ status: 204, message: "it has been deleted" }))
+    queries.deleteMovie(req.params.id).then(movie => {
+        console.log(movie);
+        res.status(200).send(movie);
+    })
 })
 
 app.put('/:id', (req, res) => {
