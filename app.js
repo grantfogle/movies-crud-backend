@@ -23,7 +23,6 @@ app.post('/', (req, res) => {
 
 app.delete('/:id', (req, res) => {
     queries.deleteMovie(req.params.id).then(movie => {
-        console.log(movie);
         res.status(200).send(movie);
     })
 })
